@@ -11,7 +11,7 @@ function App() {
       <header>
         <MyNav />
       </header>
-      <main>
+      <main className="bg-secondary">
         <Welcome />
         <AllTheBooks />
       </main>

@@ -5,9 +5,10 @@ const AllTheBooks=function () {
         
         <Container className="bg-secondary text-white mt-5 p-4 text-center" >
          <Row >
-          <Col xs={12} md={3}>
+          
            {books.map((book)=>{
-            return (<Card key={book.asin} style={{ width: '18rem' }} className="my-3" >
+            return (<Col xs={12} md={6} lg={4}>
+            <Card key={book.asin} style={{ width: '18rem' }} className="my-3" >
                 <Card.Img variant="top" src={book.img} />
                 <Card.Body>
                   <Card.Title>{book.title}</Card.Title>
@@ -19,9 +20,10 @@ const AllTheBooks=function () {
                   </Card.Text>
                 </Card.Body>
               </Card>
+              </Col>
               )
         })}
-        </Col>
+        
      </Row>
     </Container>
       )
