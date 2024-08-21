@@ -18,7 +18,7 @@ const MyFooter = () => {
         </Row>
         <Row>
           <Col className="mt-2">
-            <p>© 2024 Your Company. All rights reserved.</p>
+            <p>{new Date().getFullYear()} Your Company. All rights reserved.</p>
           </Col>
         </Row>
       </Container>
