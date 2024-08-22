@@ -43,7 +43,7 @@ class SingleBook extends Component {
             <Card.Title>{this.props.book.title}</Card.Title>
           </Card.Body>
         </Card>
-        {this.state.selected && <CommentArea id={this.props.book.asin} />}
+        {this.state.selected && <CommentArea asin={this.props.book.asin} />}
       </>
     );
   }

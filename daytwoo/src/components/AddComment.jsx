@@ -15,24 +15,22 @@ class AddComment extends Component {
     newComment: {
       comment: "",
       rate: "",
-      elementId: "",
+      elementId: this.props.asin,
     },
   };
 
   inviaCommento = (e) => {
     e.preventDefault();
 
-    fetch(
-      `https://striveschool-api.herokuapp.com/api/comments/${this.props.id}`,
-      {
-        method: "POST",
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmEzNWYzNWYyNjBjYzAwMTVjYzBkZTciLCJpYXQiOjE3MjQzMzQ3NTYsImV4cCI6MTcyNTU0NDM1Nn0.K6fNpHmwS0kFm9sJOjAda1IsADcSeinBVKKuaJAE_oc",
-        },
-        body: JSON.stringify(this.state.newComment),
-      }
-    )
+    fetch("https://striveschool-api.herokuapp.com/api/comments/", {
+      method: "POST",
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmEzNWYzNWYyNjBjYzAwMTVjYzBkZTciLCJpYXQiOjE3MjQzMzQ3NTYsImV4cCI6MTcyNTU0NDM1Nn0.K6fNpHmwS0kFm9sJOjAda1IsADcSeinBVKKuaJAE_oc",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(this.state.newComment),
+    })
       .then((response) => {
         if (response.ok) {
           console.log("commento salvato");
@@ -42,7 +40,7 @@ class AddComment extends Component {
             newComment: {
               comment: "",
               rate: "",
-              elementId: "",
+              elementId: this.props.asin,
             },
           });
         } else {
@@ -60,7 +58,7 @@ class AddComment extends Component {
       <Container>
         <Row>
           <Col>
-            <Form>
+            <Form onSubmit={this.inviaCommento}>
               <FormGroup>
                 <FormLabel>commento</FormLabel>
                 <FormControl
@@ -86,11 +84,11 @@ class AddComment extends Component {
                     this.setState({
                       newComment: {
                         ...this.state.newComment,
-                        comment: e.target.value,
+                        rate: e.target.value,
                       },
                     });
                   }}
-                  value={this.state.newComment.comment}
+                  value={this.state.newComment.rate}
                 >
                   <option>1</option>
                   <option>2</option>
