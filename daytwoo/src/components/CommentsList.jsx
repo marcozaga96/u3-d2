@@ -7,7 +7,7 @@ class CommentsList extends Component {
       <>
         {this.props.comments.map((comment) => {
           return (
-            <ListGroup.Item>
+            <ListGroup.Item key={comment.asin}>
               <p className="text-muted fs-6 display-6">
                 {comment.author}
                 <br />

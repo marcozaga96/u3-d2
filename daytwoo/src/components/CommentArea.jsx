@@ -45,6 +45,7 @@ class CommentArea extends Component {
   render() {
     return (
       <ListGroup>
+        <h2>Commenti</h2>
         <CommentsList comments={this.state.comments} />
         <AddComment asin={this.props.asin} />
       </ListGroup>
