@@ -18,33 +18,23 @@ import CommentArea from "./CommentArea";
 // };
 // export default SingleBook;
 class SingleBook extends Component {
-  state = {
-    selected: false,
-  };
-
   render() {
+    const { book, isSelected, onSelect } = this.props;
     return (
-      <>
-        <Card
-          onClick={() => this.setState({ selected: !this.state.selected })}
-          style={{
-            width: "18rem",
-            height: "30rem",
-            border: this.state.selected ? "2px solid red" : "1px solid gray",
-          }}
-          className="my-3"
-        >
-          <Card.Img
-            variant="top"
-            src={this.props.book.img}
-            style={{ height: "18rem" }}
-          />
-          <Card.Body>
-            <Card.Title>{this.props.book.title}</Card.Title>
-          </Card.Body>
-        </Card>
-        {this.state.selected && <CommentArea asin={this.props.book.asin} />}
-      </>
+      <Card
+        onClick={() => onSelect(book.asin)}
+        style={{
+          width: "18rem",
+          height: "30rem",
+          border: isSelected ? "2px solid red" : "1px solid gray",
+        }}
+        className="my-3"
+      >
+        <Card.Img variant="top" src={book.img} style={{ height: "18rem" }} />
+        <Card.Body>
+          <Card.Title>{book.title}</Card.Title>
+        </Card.Body>
+      </Card>
     );
   }
 }

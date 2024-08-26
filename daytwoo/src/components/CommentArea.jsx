@@ -11,7 +11,11 @@ class CommentArea extends Component {
   componentDidMount = () => {
     this.fetchComments();
   };
-
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.asin !== this.props.asin) {
+      this.fetchComments();
+    }
+  };
   fetchComments = () => {
     fetch(
       `https://striveschool-api.herokuapp.com/api/comments/${this.props.asin}`,
