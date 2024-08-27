@@ -58,6 +58,7 @@ class BookList extends Component {
                     <Col xs={12} md={6} lg={4} key={book.asin}>
                       <SingleBook
                         book={book}
+                        isSelected={this.state.selectedAsin === book.asin}
                         onSelect={() => this.handleBookSelect(book.asin)}
                       />
                     </Col>
