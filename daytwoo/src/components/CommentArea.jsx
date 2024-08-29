@@ -1,31 +1,33 @@
-import { Component } from "react";
+import { useState, useEffect } from "react";
 import { ListGroup } from "react-bootstrap";
 import CommentsList from "./CommentsList";
 import AddComment from "./AddComment";
 
-class CommentArea extends Component {
-  state = {
-    comments: [],
-  };
+const CommentArea = (props) => {
+  // state = {
+  //   comments: [],
+  // };
+  const [comments, setComments] = useState([]);
+  // componentDidMount = () => {
+  //   this.fetchComments();
+  // };
 
-  componentDidMount = () => {
-    this.fetchComments();
-  };
-  componentDidUpdate = (prevProps) => {
-    if (prevProps.asin !== this.props.asin) {
-      this.fetchComments();
-    }
-  };
-  fetchComments = () => {
-    fetch(
-      `https://striveschool-api.herokuapp.com/api/comments/${this.props.asin}`,
-      {
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmEzNWYzNWYyNjBjYzAwMTVjYzBkZTciLCJpYXQiOjE3MjQzMzQ3NTYsImV4cCI6MTcyNTU0NDM1Nn0.K6fNpHmwS0kFm9sJOjAda1IsADcSeinBVKKuaJAE_oc",
-        },
-      }
-    )
+  useEffect(() => {
+    console.log("SONO IN COMPONENTDIDMOUNT");
+    fetchComments();
+  }, [props]);
+  // componentDidUpdate = (prevProps) => {
+  //   if (prevProps.asin !== this.props.asin) {
+  //     this.fetchComments();
+  //   }
+  // };
+  const fetchComments = () => {
+    fetch(`https://striveschool-api.herokuapp.com/api/comments/${props.asin}`, {
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmEzNWYzNWYyNjBjYzAwMTVjYzBkZTciLCJpYXQiOjE3MjQzMzQ3NTYsImV4cCI6MTcyNTU0NDM1Nn0.K6fNpHmwS0kFm9sJOjAda1IsADcSeinBVKKuaJAE_oc",
+      },
+    })
       .then((response) => {
         console.log("ciao", response);
         if (response.ok) {
@@ -36,24 +38,26 @@ class CommentArea extends Component {
       })
       .then((arrayOfComments) => {
         console.log("COMMENTI RECUPERATE DAL SERVER", arrayOfComments);
-        this.setState({
+        // this.setState({
+        //   comments: arrayOfComments,
+        // });
+        setComments({
           comments: arrayOfComments,
         });
-        console.log("State", this.state.comments);
+        console.log("State", comments);
       })
       .catch((error) => {
         console.log("ERRORE!", error);
       });
   };
 
-  render() {
-    return (
-      <ListGroup>
-        <h2>Commenti</h2>
-        <CommentsList comments={this.state.comments} />
-        <AddComment asin={this.props.asin} />
-      </ListGroup>
-    );
-  }
-}
+  return (
+    <ListGroup>
+      <h2>Commenti</h2>
+      <CommentsList comments={comments} />
+      <AddComment asin={props.asin} />
+    </ListGroup>
+  );
+};
+
 export default CommentArea;
